@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<TilePane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<TilePane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fmxl_gui.menuController">
    <children>
       <VBox prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #2faf00;">
          <children>
@@ -82,12 +82,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e7ffdd" height="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.columnSpan="2147483647" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e7ffdd" height="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.rowIndex="3" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e7ffdd" height="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.rowIndex="4" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.rowIndex="5" />
+                  <Rectangle fx:id="hamburger" arcHeight="5.0" arcWidth="5.0" fill="#e7ffdd" height="59.0" onMouseClicked="#hamburger_btn_MouseClicked" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.columnSpan="2147483647" />
+                  <Rectangle fx:id="chicken" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="59.0" onMouseClicked="#chicken_btn_MouseClicked" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+                  <Rectangle fx:id="fries" arcHeight="5.0" arcWidth="5.0" fill="#e7ffdd" height="59.0" onMouseClicked="#fries_btn_MouseClicked" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
+                  <Rectangle fx:id="hotdog" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="59.0" onMouseClicked="#hotdog_btn_MouseClicked" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.rowIndex="3" />
+                  <Rectangle fx:id="shackburger" arcHeight="5.0" arcWidth="5.0" fill="#e7ffdd" height="59.0" onMouseClicked="#shackburger_btn_MouseClicked" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.rowIndex="4" />
+                  <Rectangle fx:id="smokeshack" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="59.0" onMouseClicked="#smokeshack_btn_MouseClicked" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.rowIndex="5" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e7ffdd" height="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" GridPane.rowIndex="6" />
                   <Label prefHeight="31.0" prefWidth="213.0" text="Hamburger - 390 cal" GridPane.columnIndex="1">
                      <GridPane.margin>
