@@ -1,12 +1,20 @@
 package fmxl_gui;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class menuController implements Initializable {
 	
@@ -46,10 +54,22 @@ public class menuController implements Initializable {
         System.out.println("You clicked rectangle: " + ((Rectangle)event.getSource()).getId());
     }
     
+    @FXML
+    Label clock;
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
-	}
+    private void initClock() {
+
+        Timeline dateTime = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            clock.setText(LocalDateTime.now().format(formatter));
+        }), new KeyFrame(Duration.seconds(1)));
+        dateTime.setCycleCount(Animation.INDEFINITE);
+        dateTime.play();
+    }
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initClock();
+    }
+
 }

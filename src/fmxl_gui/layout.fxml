@@ -13,17 +13,18 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <TilePane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fmxl_gui.menuController">
    <children>
       <VBox prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #2faf00;">
          <children>
-            <Label prefHeight="5.0" prefWidth="100.0" text="TIME" textFill="WHITE">
+            <Label fx:id="clock" prefHeight="17.0" prefWidth="233.0" text="TIME" textFill="WHITE">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <ListView prefHeight="370.0" prefWidth="200.0" style="-fx-background-color: #e7ffdd;">
+            <ListView fx:id="locationList" prefHeight="370.0" prefWidth="200.0" style="-fx-background-color: #e7ffdd;">
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
@@ -35,7 +36,7 @@
       </VBox>
       <VBox prefHeight="400.0" prefWidth="100.0" style="-fx-background-color: #2faf00;">
          <children>
-            <Label prefHeight="17.0" prefWidth="86.0" text="LOCATION" textFill="WHITE">
+            <Label fx:id="selectedLocation" prefHeight="17.0" prefWidth="86.0" text="LOCATION" textFill="WHITE">
                <VBox.margin>
                   <Insets left="220.0" />
                </VBox.margin>
@@ -219,5 +220,6 @@
             </GridPane>
          </children>
       </VBox>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
    </children>
 </TilePane>
