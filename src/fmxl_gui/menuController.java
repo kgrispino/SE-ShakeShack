@@ -104,19 +104,15 @@ public class menuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initClock();
-        
+        initClock(); 
         ObservableList<String> elements = FXCollections.observableArrayList();
         initLocations(elements);
-        
        //Update label in corner with selected location
        //https://self-learning-java-tutorial.blogspot.com/2018/06/javafx-listview-get-selected-item.html
         locationList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> {
             String selectedItem = locationList.getSelectionModel().getSelectedItem();
             //int index = locationList.getSelectionModel().getSelectedIndex();
-            
             selectedLocation.setText("Location Selected: " + selectedItem);
            });
-        
     }
 }
