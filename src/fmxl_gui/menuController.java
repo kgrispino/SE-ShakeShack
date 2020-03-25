@@ -3,7 +3,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,20 +19,24 @@ import javafx.util.Duration;
 
 public class menuController implements Initializable {
 	
+	//Global list to track what the user clicked on the menu
 	ObservableList<String> order = FXCollections.observableArrayList();
 	
 	@FXML
     private ListView<String> userOrder;
 	
+	//Function for handling what the user clicked, costs are calculated on click  
 	@FXML
     private void handleOnButtonAction(MouseEvent event)
     {
-        System.out.println("You clicked button: " + ((Rectangle)event.getSource()).getId());
+        //System.out.println("You clicked button: " + ((Rectangle)event.getSource()).getId());
         order.add(((Rectangle)event.getSource()).getId());
         userOrder.setItems(order);
+        
         double cost = calCost();
         double tax = calTax(calCost());
         double total = cost + tax;
+        
         orderCost.setText("Cost:	" + String.format("%.2f", cost));
         orderTax.setText("Tax:	" + String.format("%.2f", tax));
         totalOrdercost.setText("Total:	" + String.format("%.2f", total));
@@ -41,7 +44,8 @@ public class menuController implements Initializable {
     
     @FXML
     Label clock;
-
+    
+    //Creates a clock in the corner of the screen
     private void initClock() {
 
         Timeline dateTime = new Timeline(new KeyFrame(Duration.ZERO, e -> {
@@ -109,12 +113,6 @@ public class menuController implements Initializable {
     @FXML
     private Label totalOrdercost;
     
-    private double calTotal(double cost, double tax) {
-    	double total = cost + tax;
-    	return total;
-    	
-    }
-    
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -133,5 +131,4 @@ public class menuController implements Initializable {
            });
         
     }
-
 }
