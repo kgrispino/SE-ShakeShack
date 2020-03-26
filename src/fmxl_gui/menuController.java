@@ -1,8 +1,12 @@
 package fmxl_gui;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -10,16 +14,24 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class menuController implements Initializable {	
 	//Global list to track what the user clicked on the menu
 	ObservableList<String> order = FXCollections.observableArrayList();
+	double cost;
+	double tax;
+	double total;
 	@FXML
     private ListView<String> userOrder;
 	//Function for handling what the user clicked, costs are calculated on click  
@@ -30,9 +42,9 @@ public class menuController implements Initializable {
         order.add(((Rectangle)event.getSource()).getId());
         userOrder.setItems(order);
         
-        double cost = calCost();
-        double tax = calTax(calCost());
-        double total = cost + tax;
+        cost = calCost();
+        tax = calTax(calCost());
+        total = cost + tax;
         
         orderCost.setText("Cost:	" + String.format("%.2f", cost));
         orderTax.setText("Tax:	" + String.format("%.2f", tax));
@@ -40,7 +52,7 @@ public class menuController implements Initializable {
     }
     
     @FXML
-    Label clock;
+    private Label clock;
     //Creates a clock in the corner of the screen
     private void initClock() {
         Timeline dateTime = new Timeline(new KeyFrame(Duration.ZERO, e -> {
@@ -71,22 +83,22 @@ public class menuController implements Initializable {
     	double cost = 0;
     	for (int i = 0; i < order_length; i++) {
     		if("hamburger".equals(order.get(i))){
-    			cost = cost + 3.49;
+    			cost = cost + 4.19;
     		}
     		else if("chicken".equals(order.get(i))){
-    			cost = cost + 3.49;
+    			cost = cost + 6.19;
     		}
     		else if("fries".equals(order.get(i))){
-    			cost = cost + 1;
+    			cost = cost + 2.95;
       		}
     		else if("hotdog".equals(order.get(i))){
-    			cost = cost + 3.49;
+    			cost = cost + 3.25;
     		}
     		else if("shackburger".equals(order.get(i))){
-    			cost = cost + 3.49;
+    			cost = cost + 5.19;
       		}
     		else if("smokeshack".equals(order.get(i))){
-    			cost = cost + 3.49;
+    			cost = cost + 6.69;
     		}
     	}  	
     	return cost;
@@ -101,6 +113,75 @@ public class menuController implements Initializable {
     
     @FXML
     private Label totalOrdercost;
+    
+    @FXML
+    private Button helpButton;
+    
+    @FXML
+    private void helpButtonAction(MouseEvent event) {
+    	try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("helpWindow.fxml"));
+            /* 
+             * if "fx:controller" is not set in fxml
+             * fxmlLoader.setController(NewWindowController);
+             */
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Help");
+            stage.setScene(scene);
+            //Make it so that the user needs to x out of the window to continue
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+            
+            
+            
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+    	
+    }
+    
+    @FXML
+    private Button removeButton;
+    
+    @FXML
+    private void removeButtonAction( MouseEvent event) {
+    	//String selectedItem = userOrder.getSelectionModel().getSelectedItem();
+        int index = userOrder.getSelectionModel().getSelectedIndex();
+        //System.out.println("Removed: " + selectedItem + index);
+        
+        if("hamburger".equals(order.get(index))){
+			cost = cost - 4.19;
+		}
+		else if("chicken".equals(order.get(index))){
+			cost = cost - 6.19;
+		}
+		else if("fries".equals(order.get(index))){
+			cost = cost - 2.95;
+  		}
+		else if("hotdog".equals(order.get(index))){
+			cost = cost - 3.25;
+		}
+		else if("shackburger".equals(order.get(index))){
+			cost = cost - 5.19;
+  		}
+		else if("smokeshack".equals(order.get(index))){
+			cost = cost - 6.69;
+		}
+        //To fix bug where zero is negative
+        cost = cost + 0;
+        tax = calTax(cost);
+        total = cost + tax;
+        
+        orderCost.setText("Cost:	" + String.format("%.2f", cost));
+        orderTax.setText("Tax:	" + String.format("%.2f", tax));
+        totalOrdercost.setText("Total:	" + String.format("%.2f", total));
+        
+        userOrder.getItems().remove(index);
+    }
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
