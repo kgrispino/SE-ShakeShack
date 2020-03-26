@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -23,13 +24,17 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <ListView fx:id="locationList" prefHeight="370.0" prefWidth="200.0" style="-fx-background-color: #e7ffdd;">
+            <ListView fx:id="locationList" prefHeight="370.0" prefWidth="200.0" stylesheets="@shakeshack.css">
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
                <VBox.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </VBox.margin>
+               <styleClass>
+                  <String fx:value="list-cell" />
+                  <String fx:value="list-view" />
+               </styleClass>
             </ListView>
          </children>
       </VBox>
@@ -40,13 +45,10 @@
                   <Insets left="120.0" />
                </VBox.margin>
             </Label>
-            <ListView fx:id="userOrder" prefHeight="293.0" prefWidth="240.0">
+            <ListView fx:id="userOrder" prefHeight="293.0" prefWidth="240.0" styleClass="list-cell" stylesheets="@shakeshack.css">
                <VBox.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </VBox.margin>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
             </ListView>
             <Label fx:id="orderCost" text="COST" textAlignment="CENTER" textFill="WHITE">
                <VBox.margin>
