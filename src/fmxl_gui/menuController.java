@@ -84,7 +84,7 @@ public class menuController implements Initializable {
     		if("hamburger".equals(order.get(i))){
     			cost = cost + 4.19;
     		}
-    		else if("Chick’nShack".equals(order.get(i))){
+    		else if("chicken".equals(order.get(i))){
     			cost = cost + 6.19;
     		}
     		else if("fries".equals(order.get(i))){
@@ -152,7 +152,7 @@ public class menuController implements Initializable {
         if("hamburger".equals(order.get(index))){
 			cost = cost - 4.19;
 		}
-		else if("Chick’n Shack".equals(order.get(index))){
+		else if("chicken".equals(order.get(index))){
 			cost = cost - 6.19;
 		}
 		else if("fries".equals(order.get(index))){
