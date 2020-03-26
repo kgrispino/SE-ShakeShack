@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
@@ -116,7 +117,6 @@ public class menuController implements Initializable {
     
     @FXML
     private Button helpButton;
-    
     @FXML
     private void helpButtonAction(MouseEvent event) {
     	try {
@@ -145,7 +145,6 @@ public class menuController implements Initializable {
     
     @FXML
     private Button removeButton;
-    
     @FXML
     private void removeButtonAction( MouseEvent event) {
     	//String selectedItem = userOrder.getSelectionModel().getSelectedItem();
@@ -183,6 +182,22 @@ public class menuController implements Initializable {
     }
     
 
+    @FXML
+    private Button submitButton;
+    @FXML
+    private void submitButtonAction(MouseEvent event) {
+    	fileIO processText = new fileIO();
+    	 //Time of order
+		 processText.wrTransactionData(clock.getText());
+		 //Location of order
+		 processText.wrTransactionData(selectedLocation.getText());
+		 //Get order
+		 processText.wrTransactionData(userOrder.getItems().toString());
+		 
+		 processText.wrTransactionData(orderCost.getText());
+		 processText.wrTransactionData(orderTax.getText());
+		 processText.wrTransactionData(totalOrdercost.getText());
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initClock(); 
