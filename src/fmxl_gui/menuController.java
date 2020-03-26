@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,7 +19,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
@@ -86,7 +84,7 @@ public class menuController implements Initializable {
     		if("hamburger".equals(order.get(i))){
     			cost = cost + 4.19;
     		}
-    		else if("chicken".equals(order.get(i))){
+    		else if("Chick’nShack".equals(order.get(i))){
     			cost = cost + 6.19;
     		}
     		else if("fries".equals(order.get(i))){
@@ -154,7 +152,7 @@ public class menuController implements Initializable {
         if("hamburger".equals(order.get(index))){
 			cost = cost - 4.19;
 		}
-		else if("chicken".equals(order.get(index))){
+		else if("Chick’n Shack".equals(order.get(index))){
 			cost = cost - 6.19;
 		}
 		else if("fries".equals(order.get(index))){
