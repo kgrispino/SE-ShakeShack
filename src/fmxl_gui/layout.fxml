@@ -62,12 +62,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="orderCost" text="Cost:	" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" />
-                  <Label fx:id="orderTax" text="Tax:	" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="totalOrdercost" text="Total:	" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="orderCost" text="Cost: " textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" />
+                  <Label fx:id="orderTax" text="Tax: " textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="totalOrdercost" text="Total: " textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Button fx:id="helpButton" mnemonicParsing="false" onMouseClicked="#helpButtonAction" text="Help" GridPane.halignment="CENTER" />
                   <Button fx:id="removeButton" mnemonicParsing="false" onMouseClicked="#removeButtonAction" text="Remove item" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <Button fx:id="submitButton" mnemonicParsing="false" text="Submit order" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button fx:id="submitButton" mnemonicParsing="false" onMouseClicked="#submitButtonAction" text="Submit order" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>

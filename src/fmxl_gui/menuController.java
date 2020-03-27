@@ -195,6 +195,16 @@ public class menuController implements Initializable {
 		 processText.wrTransactionData(orderCost.getText());
 		 processText.wrTransactionData(orderTax.getText());
 		 processText.wrTransactionData(totalOrdercost.getText());
+		 
+		 order.clear();
+		 userOrder.setItems(order);
+		 cost = 0;
+		 tax = 0;
+		 total = 0;
+		 
+		 orderCost.setText("Cost:	" + String.format("%.2f", cost));
+	     orderTax.setText("Tax:	" + String.format("%.2f", tax));
+	     totalOrdercost.setText("Total:	" + String.format("%.2f", total));
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
