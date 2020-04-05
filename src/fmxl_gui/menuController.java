@@ -6,9 +6,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import fmxl_gui.socketUtils;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -179,7 +183,6 @@ public class menuController implements Initializable {
         userOrder.getItems().remove(index);
     }
     
-
     @FXML
     private Button submitButton;
     @FXML
@@ -196,15 +199,42 @@ public class menuController implements Initializable {
 		 processText.wrTransactionData(orderTax.getText());
 		 processText.wrTransactionData(totalOrdercost.getText());
 		 
-		 order.clear();
-		 userOrder.setItems(order);
-		 cost = 0;
-		 tax = 0;
-		 total = 0;
-		 
-		 orderCost.setText("Cost:	" + String.format("%.2f", cost));
-	     orderTax.setText("Tax:	" + String.format("%.2f", tax));
-	     totalOrdercost.setText("Total:	" + String.format("%.2f", total));
+		 Platform.runLater(new Runnable() 
+		 {
+		        public void run() 
+		        {
+		            socketUtils su = new socketUtils();
+		            
+		            if (su.socketConnect() == true)
+		            {
+		            	String strDouble = String.format("%.2f", total);
+		            	String msg = "Transaction>kiosk#022" + "," + strDouble;
+
+    	                su.sendMessage(msg);				            	
+    	                String rs = su.recvMessage();
+    	                su.closeSocket();
+    	                
+    	                order.clear();
+    	       		 	userOrder.setItems(order);
+	    	       		cost = 0;
+	    	       		tax = 0;
+	    	       		total = 0;
+    	       		 
+	    	       		orderCost.setText("Cost:	" + String.format("%.2f", cost));
+	    	       		orderTax.setText("Tax:	" + String.format("%.2f", tax));
+	    	       		totalOrdercost.setText("Total:	" + String.format("%.2f", total));
+    	                      
+		            }
+		            else
+		            {
+		            	Alert alert = new Alert(Alert.AlertType.ERROR);
+				        alert.setTitle("--- Network Communications Error ---");
+				        alert.setHeaderText("Unable to talk to Socket Server!");
+				          
+				        alert.showAndWait();
+		            }
+		        }
+		    });	
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

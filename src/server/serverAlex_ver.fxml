@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: e7ffdd;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: e7ffdd;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.serverController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -60,7 +60,7 @@
             <Insets top="40.0" />
          </GridPane.margin>
       </Label>
-      <Button mnemonicParsing="false" text="Exit" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Button fx:id="exitButton" mnemonicParsing="false" onMouseClicked="#removeButtonAction" text="Exit" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
       <ListView maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="186.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowSpan="2" />
       <ListView maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowSpan="2" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="185.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
