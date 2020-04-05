@@ -29,8 +29,7 @@ public class sockServer implements Runnable
 
 	   static Vector<String> vec = new Vector<String>(5);
 	   
-	   public static Hashtable<String, kiosk> clients = 
-			     new Hashtable<String, kiosk>();
+	   public static Hashtable<String, store> clients = new Hashtable<String, store>();
 	   
 	   static final String newline = "\n";
 	   static int first_time = 1;
@@ -48,7 +47,7 @@ public class sockServer implements Runnable
 	      this.ipString = ip;
 	   } 
 
-	   public static void runSockServer()   // throws Exception
+	   public static void runSockServer()  // throws Exception
 	   {
 	     boolean sessionDone = false;
 	  
@@ -71,7 +70,7 @@ public class sockServer implements Runnable
 	     try 
 	     {
 		     InetAddress ipAddress = InetAddress.getLocalHost();
-		     sss5.textArea.appendText("IP Address : " + ipAddress.getHostAddress() + newline);
+		     Controllers.getMainController().userLog.appendText("IP Address : " + ipAddress.getHostAddress() + newline);
 	     }
 	     catch (UnknownHostException e1)
 	     {
@@ -79,14 +78,14 @@ public class sockServer implements Runnable
 		    e1.printStackTrace();
 	     }
 	 
-	     sss5.textArea.appendText("Listening on port " + port_num + newline);
+	     Controllers.getMainController().userLog.appendText("Listening on port " + port_num + newline);
 	 
 	     //
 	     // initialize the hash table to the following keys
 	     //
-	     clients.put("kiosk#1", new kiosk("kiosk#1", 0, 0, 0.0));
-	     clients.put("kiosk#2", new kiosk("kiosk#2", 0, 0, 0.0));
-	     clients.put("kiosk#3", new kiosk("kiosk#3", 0, 0, 0.0));
+	     clients.put("Location#1", new store("Location#1", 0, 0.0, 0, 0, 0, 0, 0, 0));
+	     clients.put("Location#2", new store("Location#2", 0, 0.0, 0, 0, 0, 0, 0, 0));
+	     clients.put("Location#3", new store("Location#3", 0, 0.0, 0, 0, 0, 0, 0, 0));
 	     
 	     
 	     
@@ -105,7 +104,7 @@ public class sockServer implements Runnable
 		    }
 		 
 		    // update the status text area to show progress of program
-	        sss5.textArea.appendText("Client Connected : " + sock.getInetAddress() + newline);
+		    Controllers.getMainController().userLog.appendText("Client Connected : " + sock.getInetAddress() + newline);
 	        
 	        new Thread(new sockServer(sock, sock.getInetAddress().toString())).start();
 	     }
@@ -129,9 +128,9 @@ public class sockServer implements Runnable
 			case 'T':
 				if (clients.containsKey(key) == true)
 		        {
-					clients.get(key).incrementTrans();
-					clients.get(key).addTickets(Integer.parseInt(ticks));
-					clients.get(key).addDollars(Double.parseDouble(d));
+//					clients.get(key).incrementTrans();
+//					clients.get(key).addTickets(Integer.parseInt(ticks));
+//					clients.get(key).addDollars(Double.parseDouble(d));
 		        }	
 			break;
 		}
@@ -149,7 +148,7 @@ public class sockServer implements Runnable
 		nextKioskNumber = currentSize + 1;
 		kioskString     = "kiosk#" + nextKioskNumber;
 				
-		clients.put(kioskString, new kiosk(kioskString, 0, 0, 0.0));
+		clients.put(kioskString, new store(kioskString, 0, 0.0, 0, 0, 0, 0, 0, 0));
 	}
 	
 	
@@ -186,7 +185,7 @@ public class sockServer implements Runnable
 	      
 	      numOfConnections++;
 	      
-	      sss5.textArea.appendText("Num of Connections = " + numOfConnections + newline);
+	      Controllers.getMainController().userLog.appendText("Num of Connections = " + numOfConnections + newline);
 	      
 	      keyString = ipString + ":" + threadId;
 	      
@@ -227,10 +226,10 @@ public class sockServer implements Runnable
 	              
 	              	              
 	              // update the status text area to show progress of program
-	   	           sss5.textArea.appendText("RECV : " + clientString + newline);
+	              Controllers.getMainController().userLog.appendText("RECV : " + clientString + newline);
 	     	       
 	     	       // update the status text area to show progress of program
-	     	       sss5.textArea.appendText("RLEN : " + clientString.length() + newline);
+	              Controllers.getMainController().userLog.appendText("RLEN : " + clientString.length() + newline);
 	              
 	              if (clientString.length() > 128)
 	              {
@@ -285,7 +284,7 @@ public class sockServer implements Runnable
 	            	  
 	            	  if (tokens.length == 2)
 	            	  {
-	            	     clients.put(tokens[1], new kiosk(tokens[1], 0, 0, 0.0));
+	            	     clients.put(tokens[1], new store(tokens[1], 0, 0.0, 0, 0, 0, 0, 0, 0));
 	            	     
 	            	     pstream.println("ACK");
 	            	  }
@@ -351,37 +350,37 @@ public class sockServer implements Runnable
 	        csocket.close();
 	       
 	        // update the status text area to show progress of program
-		     sss5.textArea.appendText("Child Thread : " + threadId + " : is Exiting!!!" + newline);
-		     sss5.textArea.appendText("Num of Connections = " + numOfConnections);
+	        Controllers.getMainController().userLog.appendText("Child Thread : " + threadId + " : is Exiting!!!" + newline);
+	        Controllers.getMainController().userLog.appendText("Num of Connections = " + numOfConnections);
 		     
 	     } // end try  
 	 
 	     catch (SocketException e)
 	     {
 		  // update the status text area to show progress of program
-	      sss5.textArea.appendText("ERROR : Socket Exception!" + newline);
+	    	 Controllers.getMainController().userLog.appendText("ERROR : Socket Exception!" + newline);
 	     }
 	     catch (InterruptedException e)
 	     {
 		  // update the status text area to show progress of program
-	      sss5.textArea.appendText("ERROR : Interrupted Exception!" + newline);
+	    	 Controllers.getMainController().userLog.appendText("ERROR : Interrupted Exception!" + newline);
 	     }
 	     catch (UnknownHostException e)
 	     {
 		  // update the status text area to show progress of program
-	      sss5.textArea.appendText("ERROR : Unkonw Host Exception" + newline);
+	    	 Controllers.getMainController().userLog.appendText("ERROR : Unkonw Host Exception" + newline);
 	     }
 	     catch (IOException e) 
 	     {
 	     // update the status text area to show progress of program
-	      sss5.textArea.appendText("ERROR : IO Exception!" + newline);
+	    	 Controllers.getMainController().userLog.appendText("ERROR : IO Exception!" + newline);
 	     }     
 	     catch (Exception e)
 	     { 
 		  numOfConnections--;
 		  
 		  // update the status text area to show progress of program
-	      sss5.textArea.appendText("ERROR : Generic Exception!" + newline);
+		  Controllers.getMainController().userLog.appendText("ERROR : Generic Exception!" + newline);
 	     }
 	   
 	  }  // end run() thread method

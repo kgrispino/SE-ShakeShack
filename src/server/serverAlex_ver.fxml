@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -62,7 +63,7 @@
       </Label>
       <Button fx:id="exitButton" mnemonicParsing="false" onMouseClicked="#removeButtonAction" text="Exit" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
       <ListView maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="186.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowSpan="2" />
-      <ListView maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowSpan="2" />
+      <TextArea fx:id="userLog" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowSpan="2" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="185.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hottest item" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <GridPane.margin>
