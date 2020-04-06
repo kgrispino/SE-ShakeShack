@@ -1,4 +1,4 @@
-package fmxl_gui;
+package client;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

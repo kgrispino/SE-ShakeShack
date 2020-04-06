@@ -1,4 +1,4 @@
-package fmxl_gui;
+package client;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import fmxl_gui.socketUtils;
+import client.socketUtils;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
