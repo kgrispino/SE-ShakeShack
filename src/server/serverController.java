@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import server.sockServer;
@@ -28,6 +29,9 @@ public class serverController implements Initializable {
 	
 	@FXML
 	public TextArea foodLog;
+	
+	@FXML
+	public Label num_users;
 		
 	
 	private void startSockServer()

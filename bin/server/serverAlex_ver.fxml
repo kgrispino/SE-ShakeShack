@@ -34,7 +34,7 @@
             <Insets top="20.0" />
          </GridPane.margin>
       </Text>
-      <Label text="num of users" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+      <Label fx:id="num_users" text="num of users" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets top="40.0" />
          </GridPane.margin>

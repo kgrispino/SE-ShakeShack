@@ -18,6 +18,9 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
+
+import javafx.application.Platform;
+
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 
@@ -188,6 +191,16 @@ public class sockServer implements Runnable
 	      
 	      Controllers.getMainController().userLog.appendText("Num of Connections = " + numOfConnections + newline);
 	      
+	      //https://stackoverflow.com/questions/49343256/threads-in-javafx-not-on-fx-application-thread
+	      //To update UI on server screen from here
+	      Platform.runLater(new Runnable() {
+	    	    @Override
+	    	    public void run() {
+	    	    	Controllers.getMainController().num_users.setText(String.valueOf(numOfConnections));
+	    	    }
+	    	});
+	    
+	      
 	      keyString = ipString + ":" + threadId;
 	      
 	      if (vec.contains(keyString) == false)
@@ -357,7 +370,8 @@ public class sockServer implements Runnable
 	       
 	        // update the status text area to show progress of program
 	        Controllers.getMainController().userLog.appendText("Child Thread : " + threadId + " : is Exiting!!!" + newline);
-	        Controllers.getMainController().userLog.appendText("Num of Connections = " + numOfConnections);
+	        //Controllers.getMainController().userLog.appendText("Num of Connections = " + numOfConnections);
+	        Controllers.getMainController().num_users.setText(String.format("%.2f", numOfConnections));
 		     
 	     } // end try  
 	 
