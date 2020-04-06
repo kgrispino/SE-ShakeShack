@@ -190,9 +190,6 @@ public class sockServer implements Runnable
 	      
 	      keyString = ipString + ":" + threadId;
 	      
-	      System.out.println("keyString ");
-	      System.out.println(keyString);
-	      
 	      if (vec.contains(keyString) == false)
 	      {
 	    	    int counter = 0;
@@ -214,16 +211,12 @@ public class sockServer implements Runnable
 	       
 	      PrintStream pstream = new PrintStream (csocket.getOutputStream());
 	      BufferedReader rstream = new BufferedReader(new InputStreamReader(csocket.getInputStream()));
-	      System.out.println("rstream ");
-	      System.out.println(rstream);
 
 	      while (session_done == false)
 	      {
 	       	if (rstream.ready())   // check for any data messages
 	       	{
-	              clientString = rstream.readLine();
-	              
-
+	              clientString = rstream.readLine();             
 	              
 	              //
 	              // write to transaction log
@@ -269,10 +262,16 @@ public class sockServer implements Runnable
 	            		  pstream.println("NACK : ERROR : No such kiosk number!");
 	            	  }
 	              }
-	              else if (clientString.contains("Transaction>"))
+	              else if (clientString.contains("Location Selected:"))
 	              {
-	            	  String tokens[] = clientString.split("\\>");
+	            	  
+	            	  String tokens[] = clientString.split("\\:");
+	            	  System.out.println("tokens0" + tokens[0]);
+	            	  System.out.println("tokens1" + tokens[1]);
+	            	  
 	            	  String args[]   = tokens[1].split("\\,");
+	            	  
+	            	  System.out.println(args[0]);
 	            	  
 	            	  if (clients.containsKey(args[0]) == true)
 	            	  {

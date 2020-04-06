@@ -188,17 +188,17 @@ public class menuController implements Initializable {
     @FXML
     private void submitButtonAction(MouseEvent event) {
     	//Logs files
-//    	fileIO processText = new fileIO();
-//    	 //Time of order
-//		 processText.wrTransactionData(clock.getText());
-//		 //Location of order
-//		 processText.wrTransactionData(selectedLocation.getText());
-//		 //Get order
-//		 processText.wrTransactionData(userOrder.getItems().toString());
-//		 
-//		 processText.wrTransactionData(orderCost.getText());
-//		 processText.wrTransactionData(orderTax.getText());
-//		 processText.wrTransactionData(totalOrdercost.getText());
+    	fileIO processText = new fileIO();
+    	 //Time of order
+		 processText.wrTransactionData(clock.getText());
+		 //Location of order
+		 processText.wrTransactionData(selectedLocation.getText());
+		 //Get order
+		 processText.wrTransactionData(userOrder.getItems().toString());
+		 
+		 processText.wrTransactionData(orderCost.getText());
+		 processText.wrTransactionData(orderTax.getText());
+		 processText.wrTransactionData(totalOrdercost.getText());
 		 
 		 Platform.runLater(new Runnable() 
 		 {
@@ -208,8 +208,9 @@ public class menuController implements Initializable {
 		            
 		            if (su.socketConnect() == true)
 		            {
+		            	//System.out.println(selectedLocation.getText());
 		            	String strDouble = String.format("%.2f", total);
-		            	String msg = "Transaction>kiosk#022" + "," + strDouble;
+		            	String msg = selectedLocation.getText() + "," + strDouble;
 
     	                su.sendMessage(msg);				            	
     	                //String rs = su.recvMessage();
