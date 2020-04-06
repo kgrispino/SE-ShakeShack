@@ -25,6 +25,9 @@ public class serverController implements Initializable {
 	public void appendUserLog(String s) {
 		userLog.appendText(s);
 	}
+	
+	@FXML
+	public TextArea foodLog;
 		
 	
 	private void startSockServer()

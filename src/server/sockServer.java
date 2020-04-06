@@ -120,16 +120,17 @@ public class sockServer implements Runnable
 	}	  
 
 	   
+//Todo: Add all menu items	   
 	   
-	static synchronized void hashOperation(char type, String key, String ticks, String d)
+	static synchronized void hashOperation(char type, String key, String profit, String d)
 	{
 		switch (type)
 		{
 			case 'T':
 				if (clients.containsKey(key) == true)
 		        {
-//					clients.get(key).incrementTrans();
-//					clients.get(key).addTickets(Integer.parseInt(ticks));
+					clients.get(key).incrementOrder_total();
+					clients.get(key).addTotal_profit(Integer.parseInt(profit));
 //					clients.get(key).addDollars(Double.parseDouble(d));
 		        }	
 			break;
@@ -189,20 +190,23 @@ public class sockServer implements Runnable
 	      
 	      keyString = ipString + ":" + threadId;
 	      
+	      System.out.println("keyString ");
+	      System.out.println(keyString);
+	      
 	      if (vec.contains(keyString) == false)
 	      {
 	    	    int counter = 0;
 	        	vec.addElement(keyString);
 	        	
-	        	sss5.textArea_2.setText("");
+	        	Controllers.getMainController().foodLog.setText("");
 	        	Enumeration<String> en = vec.elements();
 	        	while (en.hasMoreElements())
 	        	{
-	        		sss5.textArea_2.appendText(en.nextElement() + " || ");
+	        		Controllers.getMainController().foodLog.appendText(en.nextElement() + " || ");
 	        		
 	        		if (++counter >= 6)
 	        		{
-	        			sss5.textArea_2.appendText("\r\n");
+	        			Controllers.getMainController().foodLog.appendText("\r\n");
 	        			counter = 0;
 	        		}
 	        	}
@@ -210,12 +214,15 @@ public class sockServer implements Runnable
 	       
 	      PrintStream pstream = new PrintStream (csocket.getOutputStream());
 	      BufferedReader rstream = new BufferedReader(new InputStreamReader(csocket.getInputStream()));
-	       
+	      System.out.println("rstream ");
+	      System.out.println(rstream);
+
 	      while (session_done == false)
 	      {
 	       	if (rstream.ready())   // check for any data messages
 	       	{
 	              clientString = rstream.readLine();
+	              
 
 	              
 	              //
@@ -328,15 +335,15 @@ public class sockServer implements Runnable
 	        	int counter = 0;
 	        	vec.removeElement(keyString);
 	        	
-	        	sss5.textArea_2.setText("");
+	        	Controllers.getMainController().foodLog.setText("");
 	        	Enumeration<String> en = vec.elements();
 	        	while (en.hasMoreElements())
 	        	{        		     		
-                    sss5.textArea_2.appendText(en.nextElement() + " || ");
+	        		Controllers.getMainController().foodLog.appendText(en.nextElement() + " || ");
 	        		
 	        		if (++counter >= 6)
 	        		{
-	        			sss5.textArea_2.appendText("\r\n");
+	        			Controllers.getMainController().foodLog.appendText("\r\n");
 	        			counter = 0;
 	        		}
 	        	}
