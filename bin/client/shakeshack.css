@@ -1,0 +1,19 @@
+.list-view .list-cell:odd {
+    -fx-background-color: white;
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: e7ffdd;
+}
+
+.list-view {
+  -fx-background-color: -fx-box-border, -fx-control-inner-background; //this line
+  -fx-background-insets: 0, 1;
+  -fx-padding: 1;
+}
+
+.list-view .list-cell:selected:odd,
+.list-view .list-cell:selected:even {
+    -fx-background-color: cdfffa;
+    -fx-text-fill: black;
+}
