@@ -1,3 +1,0 @@
-04-06-2020 04.24.19 : Transaction>kiosk#022,9.95
-04-06-2020 04.24.34 : Transaction>kiosk#022,9.19
-04-06-2020 04.24.45 : Transaction>kiosk#022,12.93
