@@ -35,6 +35,12 @@ public class menuController implements Initializable {
 	double cost;
 	double tax;
 	double total;
+	int friesc;
+	int burgercount;
+	int chickencount;
+	int shackburgercount;
+	int hotdogcount;
+	int smokeshackcount;
 	@FXML
     private ListView<String> userOrder;
 	//Function for handling what the user clicked, costs are calculated on click  
@@ -86,7 +92,7 @@ public class menuController implements Initializable {
     	double cost = 0;
     	for (int i = 0; i < order_length; i++) {
     		if("hamburger".equals(order.get(i))){
-    			cost = cost + 4.19;
+    			cost = cost + 4.19;    			
     		}
     		else if("chicken".equals(order.get(i))){
     			cost = cost + 6.19;
@@ -152,7 +158,7 @@ public class menuController implements Initializable {
     	//String selectedItem = userOrder.getSelectionModel().getSelectedItem();
         int index = userOrder.getSelectionModel().getSelectedIndex();
         //System.out.println("Removed: " + selectedItem + index);
-        
+        //removes cost of item from total
         if("hamburger".equals(order.get(index))){
 			cost = cost - 4.19;
 		}
@@ -205,23 +211,52 @@ public class menuController implements Initializable {
 		        public void run() 
 		        {
 		            socketUtils su = new socketUtils();
+		        	int order_length = order.size();
+
+		            for (int i = 0; i < order_length; i++) {
+		        		if("hamburger".equals(order.get(i))){
+		        			burgercount++;
+		        			
+		        		}
+		        		else if("chicken".equals(order.get(i))){
+		        			chickencount++;
+		        		}
+		        		else if("fries".equals(order.get(i))){
+		        			friesc = friesc + 1;
+		          		}
+		        		else if("hotdog".equals(order.get(i))){
+		        			hotdogcount++;
+		        		}
+		        		else if("shackburger".equals(order.get(i))){
+		        			shackburgercount++;
+		          		}
+		        		else if("smokeshack".equals(order.get(i))){
+		        			smokeshackcount++;
+		        		}
+		        	}  	
 		            
 		            if (su.socketConnect() == true)
 		            {
+		            	String OrdertoString = "Order: " + userOrder.getItems().toString();
 		            	//System.out.println(selectedLocation.getText());
 		            	String strDouble = String.format("%.2f", total);
-		            	String msg = selectedLocation.getText() + "," + strDouble;
-
+		            	String msg = selectedLocation.getText() + "," + strDouble + "," + OrdertoString + "," + String.valueOf(burgercount) + "," + String.valueOf(chickencount) + "," + String.valueOf(shackburgercount) + ","  + String.valueOf(smokeshackcount) + "," + String.valueOf(hotdogcount) + "," + String.valueOf(friesc);;
+		            	//System.out.println(userOrder.getItems().toString());
     	                su.sendMessage(msg);				            	
     	                //String rs = su.recvMessage();
     	                su.closeSocket();
-    	                
     	                order.clear();
     	       		 	userOrder.setItems(order);
 	    	       		cost = 0;
 	    	       		tax = 0;
 	    	       		total = 0;
-    	       		 
+	    	       		chickencount = 0;
+	    	       		burgercount = 0;
+	    	       		shackburgercount = 0;
+	    	       		smokeshackcount = 0;
+	    	       		friesc = 0;
+	    	       		hotdogcount = 0;
+	    	       		
 	    	       		orderCost.setText("Cost:	" + String.format("%.2f", cost));
 	    	       		orderTax.setText("Tax:	" + String.format("%.2f", tax));
 	    	       		totalOrdercost.setText("Total:	" + String.format("%.2f", total));

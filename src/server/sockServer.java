@@ -125,13 +125,14 @@ public class sockServer implements Runnable
 	   
 //Todo: Add all menu items	   
 	   
-	static synchronized void hashOperation(char type, String key, String profit, String d)
+	static synchronized void hashOperation(char type, String key, String profit, String d, String burger)
 	{
 		switch (type)
 		{
 			case 'T':
 				if (clients.containsKey(key) == true)
 		        {
+					clients.get(key).addBurger(Integer.parseInt(burger.trim()));
 					clients.get(key).incrementOrder_total();
 					clients.get(key).addTotal_profit(Integer.parseInt(profit));
 //					clients.get(key).addDollars(Double.parseDouble(d));
@@ -288,7 +289,7 @@ public class sockServer implements Runnable
 	            	  
 	            	  if (clients.containsKey(args[0]) == true)
 	            	  {
-	            		  hashOperation('T', args[0], args[1], args[2]);
+	            		  hashOperation('T', args[0], args[1], args[2], args[3]);
 	            		  
 	            		  pstream.println("ACK");
 	            	  }
