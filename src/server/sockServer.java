@@ -125,7 +125,7 @@ public class sockServer implements Runnable
 	   
 //Todo: Add all menu items	   
 	   
-	static synchronized void hashOperation(char type, String key, String profit, String d, String burger)
+	static synchronized void hashOperation(char type, String key, String profit, String burger, String chicken, String fries, String hotdog, String shack, String smoke)
 	{
 		switch (type)
 		{
@@ -133,9 +133,13 @@ public class sockServer implements Runnable
 				if (clients.containsKey(key) == true)
 		        {
 					clients.get(key).addBurger(Integer.parseInt(burger.trim()));
+					clients.get(key).addFries(Integer.parseInt(fries.trim()));
+					clients.get(key).addHotdog(Integer.parseInt(hotdog.trim()));
+					clients.get(key).addChicken(Integer.parseInt(chicken.trim()));
+					clients.get(key).addShackburger(Integer.parseInt(shack.trim()));
+					clients.get(key).addSmokeshack(Integer.parseInt(smoke.trim()));
 					clients.get(key).incrementOrder_total();
 					clients.get(key).addTotal_profit(Integer.parseInt(profit));
-//					clients.get(key).addDollars(Double.parseDouble(d));
 		        }	
 			break;
 		}
@@ -245,7 +249,7 @@ public class sockServer implements Runnable
 	     	       // update the status text area to show progress of program
 	              Controllers.getMainController().userLog.appendText("RLEN : " + clientString.length() + newline);
 	              
-	              if (clientString.length() > 128)
+	              if (clientString.length() > 1000)
 	              {
 	           	   session_done = true;
 	           	   continue;
@@ -280,8 +284,17 @@ public class sockServer implements Runnable
 	              {
 	            	  
 	            	  String tokens[] = clientString.split("\\:");
-	            	  System.out.println("tokens0" + tokens[0]);
-	            	  System.out.println("tokens1" + tokens[1]);
+	            	  //tokens[1] = Location 1, Location 2, or Location 3
+	            	  //tokens[2] = total
+	            	  //tokens[4] = array of items
+
+//	            	  System.out.println("tokens5 " + tokens[5]); = Burger
+//	            	  System.out.println("tokens4 " + tokens[6]); = Chicken
+//	            	  System.out.println("tokens3 " + tokens[7]); = Fires
+//	            	  System.out.println("tokens2 " + tokens[8]); = Hotdog
+//	            	  System.out.println("tokens1 " + tokens[9]); = Shack
+//	            	  System.out.println("tokens0 " + tokens[10]); = Smoke
+	            	  //System.out.println("tokens len" + tokens.length);
 	            	  
 	            	  String args[]   = tokens[1].split("\\,");
 	            	  
@@ -289,8 +302,7 @@ public class sockServer implements Runnable
 	            	  
 	            	  if (clients.containsKey(args[0]) == true)
 	            	  {
-	            		  hashOperation('T', args[0], args[1], args[2], args[3]);
-	            		  
+	            		  hashOperation('T', args[0], args[1], tokens[5], tokens[6], tokens[7], tokens[8], tokens[9], tokens[10]);
 	            		  pstream.println("ACK");
 	            	  }
 	            	  else

@@ -240,7 +240,7 @@ public class menuController implements Initializable {
 		            	String OrdertoString = "Order: " + userOrder.getItems().toString();
 		            	//System.out.println(selectedLocation.getText());
 		            	String strDouble = String.format("%.2f", total);
-		            	String msg = selectedLocation.getText() + "," + strDouble + "," + OrdertoString + "," + String.valueOf(burgercount) + "," + String.valueOf(chickencount) + "," + String.valueOf(shackburgercount) + ","  + String.valueOf(smokeshackcount) + "," + String.valueOf(hotdogcount) + "," + String.valueOf(friesc);;
+		            	String msg = selectedLocation.getText() + ":" + strDouble + " : " + OrdertoString + " : " + String.valueOf(burgercount) + " : " + String.valueOf(chickencount) + " : " + String.valueOf(friesc) + " : "  + String.valueOf(hotdogcount) + " : " + String.valueOf(shackburgercount) + " : " + String.valueOf(smokeshackcount);
 		            	//System.out.println(userOrder.getItems().toString());
     	                su.sendMessage(msg);				            	
     	                //String rs = su.recvMessage();
