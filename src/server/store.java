@@ -1,5 +1,7 @@
 package server;
 
+import java.text.DecimalFormat;
+
 public class store {
 	String location;
 	int order_total;
@@ -26,11 +28,12 @@ public class store {
 		smokeshack = smoke;
 	}
 	
-	public String toString()
-	{
+	public String toString(){
+		DecimalFormat f = new DecimalFormat("0.00");
+		
 		return location + " : " 
 				+ "Total Orders = " + order_total 
-				+ "  Total Profit = " + total_profit 
+				+ "  Total Profit = " + f.format(total_profit)
 				+ "  Total Burgers = " + burger 
 				+ "  Total Fries = " + fries
 				+ "  Total Chicken Burgers = " + chicken
@@ -40,48 +43,35 @@ public class store {
 			   ;
 	}
 	
-	public void incrementOrder_total()
-	{
+	public void incrementOrder_total(){
 		order_total++;
 	}
 	
-	public void addTotal_profit(double c)
-	{
+	public void addTotal_profit(double c){
 		total_profit = total_profit + c;
 	}
 	
-	public void addBurger(int d)
-	{
+	public void addBurger(int d){
 		burger = burger + d;
 	}
 	
-	public void addFries(int d)
-	{
+	public void addFries(int d){
 		fries = fries + d;
 	}
 	
-	public void addChicken(int d)
-	{
+	public void addChicken(int d){
 		chicken = chicken + d;
 	}	
 	
-	public void addShackburger(int d)
-	{
+	public void addShackburger(int d){
 		shackburger = shackburger + d;
 	}
 	
-	public void addHotdog(int d)
-	{
+	public void addHotdog(int d){
 		hotdog = hotdog + d;
 	}
 	
-	public void addSmokeshack(int d)
-	{
+	public void addSmokeshack(int d){
 		smokeshack = smokeshack + d;
-	}
-	
-	public int getburg()
-	{
-		return burger;
 	}
 }

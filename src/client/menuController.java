@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import client.socketUtils;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;

@@ -3,9 +3,7 @@ package server;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.ResourceBundle;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -30,7 +28,7 @@ public class serverController implements Initializable {
 	private void removeButtonAction( MouseEvent event) {
 		System.exit(0);
 	}
-	
+
 	@FXML
 	public TextArea userLog;
 	
@@ -48,17 +46,24 @@ public class serverController implements Initializable {
 	public Button logBtn;
 	
 	@FXML
-	private void logClick(MouseEvent event) {
-	     
+	private void logClick(MouseEvent event) {   
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("--- Ticket Kiosk ---");
-        alert.setHeaderText("Total Number of Transactions");
-        
+        alert.setHeaderText("Total Number of Transactions");    
         alert.setContentText(sockServer.getAllTransactions());
-        alert.getDialogPane().setPrefSize(1100, 480);
-        
+        alert.getDialogPane().setPrefSize(1100, 480);   
         alert.showAndWait();
-
+	}
+	
+	@FXML
+	private void openStoreClick(MouseEvent event) {   
+		int nextStoreNumber, currentSize = 0;
+		String storeString;
+		currentSize     = sockServer.clients.size();
+		nextStoreNumber = currentSize + 1;
+		storeString     = "Location " + nextStoreNumber;
+				
+		sockServer.clients.put(storeString, new store(storeString, 0, 0.00, 0, 0, 0, 0, 0, 0));
 	}
 	
     private void initTotals() {
@@ -66,33 +71,21 @@ public class serverController implements Initializable {
         	int[] totals = sockServer.getAllTotals();
         	int maxIndex = 0;
         	for (int i = 0; i < totals.length; i++) {
-        		if (totals[maxIndex] <= totals[i]) {
-        			maxIndex = i;
-        		}	
+        		if (totals[maxIndex] <= totals[i])
+        			maxIndex = i;	
         	}
-        	if (maxIndex == 0) {
+        	if (maxIndex == 0) 
         		hotItem.setText("Hamburger");
-        	}
-        	
-        	else if (maxIndex == 1) {
+        	else if (maxIndex == 1) 
         		hotItem.setText("Chicken Burger");
-        	}
-        	
-        	else if (maxIndex == 2) {
+        	else if (maxIndex == 2) 
         		hotItem.setText("Fries");
-        	}
-        	
-        	else if (maxIndex == 3) {
+        	else if (maxIndex == 3) 
         		hotItem.setText("Hotdogs");
-        	}
-        	
-        	else if (maxIndex == 4) {
+        	else if (maxIndex == 4) 
         		hotItem.setText("Shack Burger");
-        	}
-        	
-        	else if (maxIndex == 5) {
+        	else if (maxIndex == 5) 
         		hotItem.setText("SmokeShack Burger");
-        	}
         }), new KeyFrame(Duration.seconds(1)));
         updateTotals.setCycleCount(Animation.INDEFINITE);
         updateTotals.play();
@@ -108,21 +101,16 @@ public class serverController implements Initializable {
         }), new KeyFrame(Duration.seconds(1)));
         dateTime.setCycleCount(Animation.INDEFINITE);
         dateTime.play();
-    }
-		
+    }	
 	
-	private void startSockServer()
-	  {	
-		 Thread ServerThread = new Thread()
-		 {
-		    public void run()
-			  { 	
+	private void startSockServer(){	
+		Thread ServerThread = new Thread(){
+		    public void run(){ 	
 				  sockServer.runSockServer();
-		      }
-		 };
-
+		    }
+		};
 	    ServerThread.start();
-	  }
+	}
 	
 
 	public void initialize(URL location, ResourceBundle resources) {
