@@ -237,11 +237,10 @@ public class menuController implements Initializable {
 		            
 		            if (su.socketConnect() == true)
 		            {
-		            	String OrdertoString = "Order: " + userOrder.getItems().toString();
+		            	//String OrdertoString = userOrder.getItems().toString();
 		            	//System.out.println(selectedLocation.getText());
 		            	String strDouble = String.format("%.2f", total);
-		            	String msg = selectedLocation.getText() + ":" + strDouble + " : " + OrdertoString + " : " + String.valueOf(burgercount) + " : " + String.valueOf(chickencount) + " : " + String.valueOf(friesc) + " : "  + String.valueOf(hotdogcount) + " : " + String.valueOf(shackburgercount) + " : " + String.valueOf(smokeshackcount);
-		            	//System.out.println(userOrder.getItems().toString());
+		            	String msg = "Transaction>" + selectedLocation.getText() + "," + strDouble + "," + String.valueOf(burgercount) + "," + String.valueOf(chickencount) + "," + String.valueOf(friesc) + ","  + String.valueOf(hotdogcount) + "," + String.valueOf(shackburgercount) + "," + String.valueOf(smokeshackcount);
     	                su.sendMessage(msg);				            	
     	                //String rs = su.recvMessage();
     	                su.closeSocket();
@@ -283,7 +282,7 @@ public class menuController implements Initializable {
         locationList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> {
             String selectedItem = locationList.getSelectionModel().getSelectedItem();
             //int index = locationList.getSelectionModel().getSelectedIndex();
-            selectedLocation.setText("Location Selected: " + selectedItem);
+            selectedLocation.setText(selectedItem);
            });
     }
 }

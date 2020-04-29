@@ -85,12 +85,17 @@ public class sockServer implements Runnable
 	 
 	     //
 	     // initialize the hash table to the following keys
-	     //
-	     clients.put("Location#1", new store("Location#1", 0, 0.0, 0, 0, 0, 0, 0, 0));
-	     clients.put("Location#2", new store("Location#2", 0, 0.0, 0, 0, 0, 0, 0, 0));
-	     clients.put("Location#3", new store("Location#3", 0, 0.0, 0, 0, 0, 0, 0, 0));
+
+	     clients.put("Location 1", new store("Location 1", 0, 0.0, 0, 0, 0, 0, 0, 0));
+	     clients.put("Location 2", new store("Location 2", 0, 0.0, 0, 0, 0, 0, 0, 0));
+	     clients.put("Location 3", new store("Location 3", 0, 0.0, 0, 0, 0, 0, 0, 0));
 	     
+	     //Final lab
 	     
+//	     for (int i = 0; i < 1000000; i++) {
+//	    	 clients.put("Location " + i, new store("Location " + i, 0, 1.00, 0, 1, 0, 0, 0, 0));
+//	     }
+//	     System.out.print("After loop");
 	     
 	     sessionDone = false;
 	     while (sessionDone == false)
@@ -126,9 +131,11 @@ public class sockServer implements Runnable
 //Todo: Add all menu items	   
 	   
 	static synchronized void hashOperation(char type, String key, String profit, String burger, String chicken, String fries, String hotdog, String shack, String smoke)
+	//static synchronized void hashOperation(char type, String key, String profit)
 	{
 		switch (type)
 		{
+		
 			case 'T':
 				if (clients.containsKey(key) == true)
 		        {
@@ -139,7 +146,9 @@ public class sockServer implements Runnable
 					clients.get(key).addShackburger(Integer.parseInt(shack.trim()));
 					clients.get(key).addSmokeshack(Integer.parseInt(smoke.trim()));
 					clients.get(key).incrementOrder_total();
-					clients.get(key).addTotal_profit(Integer.parseInt(profit));
+					clients.get(key).addTotal_profit(Double.parseDouble(profit));
+					
+					//System.out.println(clients.get(key).toString());
 		        }	
 			break;
 		}
@@ -172,12 +181,39 @@ public class sockServer implements Runnable
 		List<String> v = new ArrayList<String>(clients.keySet());
 	    Collections.sort(v);
 		
-	    for (String str : v) 
+	    for (String str : v) { 
 	        rs = rs + clients.get(str.toString()) + "\r\n";
+	    }
 				
 		return rs;
 	}
 
+	public static int[] getAllTotals()
+	{
+		String rs="";
+		
+		int total_burg = 0;
+		int total_chicken = 0;
+		int total_fries = 0;
+		int total_hotdogs = 0;
+		int total_shack = 0;
+		int total_smoke = 0;
+		
+		List<String> v = new ArrayList<String>(clients.keySet());
+	    Collections.sort(v);
+		
+	    for (String str : v) { 
+	        rs = rs + clients.get(str.toString()) + "\r\n";
+	        total_burg = total_burg + (clients.get(str.toString()).burger);
+	        total_fries = total_fries + (clients.get(str.toString()).fries);
+	        total_chicken = total_chicken + (clients.get(str.toString()).chicken);
+	        total_hotdogs = total_hotdogs + (clients.get(str.toString()).hotdog);
+	        total_shack = total_shack + (clients.get(str.toString()).shackburger);
+	        total_smoke = total_smoke + (clients.get(str.toString()).smokeshack);
+	    }
+	    int[] totals = {total_burg, total_chicken, total_fries, total_hotdogs, total_shack, total_smoke};
+		return totals;
+	}
 	
 	
 	// This is the thread code that ALL clients will run()
@@ -280,51 +316,24 @@ public class sockServer implements Runnable
 	            		  pstream.println("NACK : ERROR : No such kiosk number!");
 	            	  }
 	              }
-	              else if (clientString.contains("Location Selected:"))
+	              
+	              else if (clientString.contains("Transaction>"))
 	              {
-	            	  
-	            	  String tokens[] = clientString.split("\\:");
-	            	  //tokens[1] = Location 1, Location 2, or Location 3
-	            	  //tokens[2] = total
-	            	  //tokens[4] = array of items
-
-//	            	  System.out.println("tokens5 " + tokens[5]); = Burger
-//	            	  System.out.println("tokens4 " + tokens[6]); = Chicken
-//	            	  System.out.println("tokens3 " + tokens[7]); = Fires
-//	            	  System.out.println("tokens2 " + tokens[8]); = Hotdog
-//	            	  System.out.println("tokens1 " + tokens[9]); = Shack
-//	            	  System.out.println("tokens0 " + tokens[10]); = Smoke
-	            	  //System.out.println("tokens len" + tokens.length);
-	            	  
+	            	  String tokens[] = clientString.split("\\>");
 	            	  String args[]   = tokens[1].split("\\,");
-	            	  
-	            	  System.out.println(args[0]);
 	            	  
 	            	  if (clients.containsKey(args[0]) == true)
 	            	  {
-	            		  hashOperation('T', args[0], args[1], tokens[5], tokens[6], tokens[7], tokens[8], tokens[9], tokens[10]);
+	            		  hashOperation('T', args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
 	            		  pstream.println("ACK");
+	            		  
 	            	  }
 	            	  else
 	            	  {
 	            		  pstream.println("NACK : ERROR : No such kiosk number!");
 	            	  }
 	              }
-	              else if (clientString.contains("Configure>"))
-	              {
-	            	  String tokens[] = clientString.split("\\>");
-	            	  
-	            	  if (tokens.length == 2)
-	            	  {
-	            	     clients.put(tokens[1], new store(tokens[1], 0, 0.0, 0, 0, 0, 0, 0, 0));
-	            	     
-	            	     pstream.println("ACK");
-	            	  }
-	            	  else
-	            	  {
-	            		  pstream.println("NACK : ERROR : Invalid number of parameters!");
-	            	  }
-	              }
+	              
 	              else if (clientString.contains("Date>"))
 	              {
 	            	numOfMessages++;
@@ -408,13 +417,13 @@ public class sockServer implements Runnable
 	     // update the status text area to show progress of program
 	    	 Controllers.getMainController().userLog.appendText("ERROR : IO Exception!" + newline);
 	     }     
-	     catch (Exception e)
-	     { 
-		  numOfConnections--;
-		  
-		  // update the status text area to show progress of program
-		  Controllers.getMainController().userLog.appendText("ERROR : Generic Exception!" + newline);
-	     }
+//	     catch (Exception e)
+//	     { 
+//		  numOfConnections--;
+//		  
+//		  // update the status text area to show progress of program
+//		  Controllers.getMainController().userLog.appendText("ERROR : Generic Exception!" + newline);
+//	     }
 	   
 	  }  // end run() thread method
 }

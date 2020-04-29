@@ -79,4 +79,9 @@ public class store {
 	{
 		smokeshack = smokeshack + d;
 	}
+	
+	public int getburg()
+	{
+		return burger;
+	}
 }
