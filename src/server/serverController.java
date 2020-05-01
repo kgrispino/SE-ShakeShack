@@ -3,6 +3,8 @@ package server;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -44,6 +46,9 @@ public class serverController implements Initializable {
 	
 	@FXML
 	public Button logBtn;
+	
+	@FXML
+    public Label hotLoc;
 	
 	@FXML
 	private void logClick(MouseEvent event) {   
@@ -91,6 +96,26 @@ public class serverController implements Initializable {
         updateTotals.play();
     }
     
+    private void initOrderTotal() {
+        Timeline updateTotals = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+        	List<Integer> orderNumList = new ArrayList<Integer>();
+        	orderNumList = sockServer.getAllOrderNums();
+        	int maxIndex = 0;
+        	for (int i = 0; i < orderNumList.size(); i++) {
+        		if (orderNumList.get(maxIndex) <= orderNumList.get(i))
+        			maxIndex = i;	
+        	}
+        	
+        	hotLoc.setText("Location " + String.valueOf(maxIndex));
+        	if (orderNumList.get(maxIndex).equals(0)) {
+        		hotLoc.setText("None");
+        	}
+        	
+        }), new KeyFrame(Duration.seconds(1)));
+        updateTotals.setCycleCount(Animation.INDEFINITE);
+        updateTotals.play();
+    }
+    
     @FXML
     private Label clock;
     //Creates a clock in the corner of the screen
@@ -115,6 +140,7 @@ public class serverController implements Initializable {
 
 	public void initialize(URL location, ResourceBundle resources) {
 		Controllers.setMainController(this);
+		initOrderTotal();
 		initTotals();
 		initClock();
 		startSockServer();

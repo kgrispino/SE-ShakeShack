@@ -154,6 +154,18 @@ public class sockServer implements Runnable
 		return totals;
 	}
 	
+	
+	public static List<Integer> getAllOrderNums(){
+		List<String> v = new ArrayList<String>(clients.keySet());
+		List<Integer> orderList = new ArrayList<Integer>();
+		
+	    Collections.sort(v);
+	    for (String str : v) { 
+	    	orderList.add(clients.get(str.toString()).order_total);
+	    }
+		return orderList;
+	}
+	
 	// This is the thread code that ALL clients will run()
 	public void run(){
 	   try{
