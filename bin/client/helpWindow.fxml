@@ -6,6 +6,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This is a help window, x out of this window to continue using the application" wrappingWidth="602.22900390625" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This is a client that connects to a server which logs the orders that are made at ShakeShack. To submit an order: select a location, select the items you would like, and click 'Submit Order.' Your total cost, inlcuding tax, will be calculated automatically. To remove items from the order: click on the item you would like to remove and select the 'Remove item' button. To exit out of this window to continue using the application: click the X on the top left. " wrappingWidth="602.22900390625" />
    </children>
 </VBox>
+
