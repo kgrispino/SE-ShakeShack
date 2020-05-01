@@ -184,7 +184,6 @@ public class menuController implements Initializable {
         orderCost.setText("Cost:	" + String.format("%.2f", cost));
         orderTax.setText("Tax:	" + String.format("%.2f", tax));
         totalOrdercost.setText("Total:	" + String.format("%.2f", total));
-        
         userOrder.getItems().remove(index);
     }
     
@@ -192,8 +191,16 @@ public class menuController implements Initializable {
     private Button submitButton;
     @FXML
     private void submitButtonAction(MouseEvent event) {
-    	//Logs files
-    	fileIO processText = new fileIO();
+    	if (selectedLocation.getText().contentEquals("")) {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+	        alert.setTitle("Error");
+	        alert.setHeaderText("Please select a location from the Location List");
+	        alert.showAndWait();
+    	}
+    	
+    	else{
+    	 //Logs files
+    	 fileIO processText = new fileIO();
     	 //Time of order
 		 processText.wrTransactionData(clock.getText());
 		 //Location of order
@@ -260,16 +267,9 @@ public class menuController implements Initializable {
 	    	       		totalOrdercost.setText("Total:	" + String.format("%.2f", total));
     	                      
 		            }
-		            else
-		            {
-		            	Alert alert = new Alert(Alert.AlertType.ERROR);
-				        alert.setTitle("--- Network Communications Error ---");
-				        alert.setHeaderText("Unable to talk to Socket Server!");
-				          
-				        alert.showAndWait();
-		            }
 		        }
 		    });	
+    	}
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
