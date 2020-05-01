@@ -166,6 +166,17 @@ public class sockServer implements Runnable
 		return orderList;
 	}
 	
+	public static List<Double> getTotalProfit(){
+		List<String> v = new ArrayList<String>(clients.keySet());
+		List<Double> profit = new ArrayList<Double>();
+		
+	    Collections.sort(v);
+	    for (String str : v) { 
+	    	profit.add(clients.get(str.toString()).total_profit);
+	    }
+		return profit;
+	}
+	
 	// This is the thread code that ALL clients will run()
 	public void run(){
 	   try{

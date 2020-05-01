@@ -1,6 +1,7 @@
 package server;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -115,6 +116,28 @@ public class serverController implements Initializable {
         updateTotals.setCycleCount(Animation.INDEFINITE);
         updateTotals.play();
     }
+    @FXML
+    public Label totalProf;
+    
+    private void initTotalProfit() {
+        Timeline updateTotals = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+        	List<Double> totalProfitList = new ArrayList<Double>();
+        	totalProfitList = sockServer.getTotalProfit();
+        	Double total = 0.00;
+        	for (int i = 0; i < totalProfitList.size(); i++) {
+        		total = total + totalProfitList.get(i);
+        	}
+        	DecimalFormat f = new DecimalFormat("0.00");
+        	totalProf.setText("Total Profit:  " + String.valueOf(f.format(total)));
+        	if (total.equals(0.00)) {
+        		totalProf.setText("None");
+        	}
+        	
+        }), new KeyFrame(Duration.seconds(1)));
+        updateTotals.setCycleCount(Animation.INDEFINITE);
+        updateTotals.play();
+    }
+    
     
     @FXML
     private Label clock;
@@ -142,6 +165,7 @@ public class serverController implements Initializable {
 		Controllers.setMainController(this);
 		initOrderTotal();
 		initTotals();
+		initTotalProfit();
 		initClock();
 		startSockServer();
 	}

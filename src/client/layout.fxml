@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -65,9 +66,18 @@
                   <Label fx:id="orderCost" text="Cost: " textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" />
                   <Label fx:id="orderTax" text="Tax: " textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label fx:id="totalOrdercost" text="Total: " textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button fx:id="helpButton" mnemonicParsing="false" onMouseClicked="#helpButtonAction" text="Help" GridPane.halignment="CENTER" />
-                  <Button fx:id="removeButton" mnemonicParsing="false" onMouseClicked="#removeButtonAction" text="Remove item" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <Button fx:id="submitButton" mnemonicParsing="false" onMouseClicked="#submitButtonAction" text="Submit order" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button fx:id="helpButton" mnemonicParsing="false" onMouseClicked="#helpButtonAction" text="Help" GridPane.halignment="CENTER">
+                     <tooltip>
+                        <Tooltip text="Click this to access the HELP window" />
+                     </tooltip></Button>
+                  <Button fx:id="removeButton" mnemonicParsing="false" onMouseClicked="#removeButtonAction" text="Remove item" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <tooltip>
+                        <Tooltip text="Click this to submit your order" />
+                     </tooltip></Button>
+                  <Button fx:id="submitButton" mnemonicParsing="false" onMouseClicked="#submitButtonAction" text="Submit order" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <tooltip>
+                        <Tooltip text="Click this to submit your order" />
+                     </tooltip></Button>
                </children>
             </GridPane>
          </children>

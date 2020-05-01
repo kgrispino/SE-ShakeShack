@@ -4,10 +4,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
@@ -44,7 +45,7 @@
             <Insets top="80.0" />
          </GridPane.margin>
       </Text>
-      <Label text="profit" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+      <Label fx:id="totalProf" text="profit" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets top="100.0" />
          </GridPane.margin>
@@ -60,7 +61,10 @@
             <Insets top="40.0" />
          </GridPane.margin>
       </Label>
-      <Button fx:id="exitButton" mnemonicParsing="false" onMouseClicked="#removeButtonAction" text="Exit" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Button fx:id="exitButton" mnemonicParsing="false" onMouseClicked="#removeButtonAction" text="Exit" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+         <tooltip>
+            <Tooltip text="Click this button to EXIT the socket server application program.&quot;Click this button to EXIT the socket server application program." />
+         </tooltip></Button>
       <TextArea fx:id="foodLog" layoutX="214.0" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="192.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowSpan="2" />
       <TextArea fx:id="userLog" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowSpan="2" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="185.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
@@ -89,7 +93,13 @@
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
+         <tooltip>
+            <Tooltip text="Click this button to EXIT the socket server application program" />
+         </tooltip>
       </Button>
-      <Button fx:id="newStoreBtn" mnemonicParsing="false" onMouseClicked="#openStoreClick" text="Create new Store" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+      <Button fx:id="newStoreBtn" mnemonicParsing="false" onMouseClicked="#openStoreClick" text="Create new Store" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <tooltip>
+            <Tooltip text="Click this to create a new store" />
+         </tooltip></Button>
    </children>
 </GridPane>
