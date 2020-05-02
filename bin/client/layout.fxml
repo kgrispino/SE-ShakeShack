@@ -68,7 +68,7 @@
                   <Label fx:id="totalOrdercost" text="Total: " textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Button fx:id="helpButton" mnemonicParsing="false" onMouseClicked="#helpButtonAction" text="Help" GridPane.halignment="CENTER">
                      <tooltip>
-                        <Tooltip text="Empty Tooltip" />
+                        <Tooltip text="Click this to access the HELP window" />
                      </tooltip></Button>
                   <Button fx:id="removeButton" mnemonicParsing="false" onMouseClicked="#removeButtonAction" text="Remove item" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <tooltip>

@@ -1,5 +1,8 @@
 package server;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
@@ -53,10 +56,38 @@ public class serverController implements Initializable {
 	
 	@FXML
 	private void logClick(MouseEvent event) {   
+		String logString = "";
+		try
+        {
+    	      File f = new File("transactionLog.txt");
+    	      if (f.exists())
+    	      {
+                FileReader reader = new FileReader("transactionLog.txt");
+                BufferedReader br = new BufferedReader(reader);
+              
+                String line = br.readLine();
+                while (line != null)
+                {
+                	logString = logString + line + "\r\n";
+                	line = br.readLine();
+                }
+                
+                br.close();
+    	      }
+    	      else
+    	      {
+    	    	  logString = "No log File Found!";
+    	      }
+    	 }
+         catch(Exception e2)
+         {   
+    	    e2.printStackTrace(); 
+         }		
+		
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("--- Ticket Kiosk ---");
         alert.setHeaderText("Total Number of Transactions");    
-        alert.setContentText(sockServer.getAllTransactions());
+        alert.setContentText(logString);
         alert.getDialogPane().setPrefSize(1100, 480);   
         alert.showAndWait();
 	}
@@ -107,7 +138,7 @@ public class serverController implements Initializable {
         			maxIndex = i;	
         	}
         	
-        	hotLoc.setText("Location " + String.valueOf(maxIndex));
+        	hotLoc.setText("Location " + String.valueOf(maxIndex + 1));
         	if (orderNumList.get(maxIndex).equals(0)) {
         		hotLoc.setText("None");
         	}

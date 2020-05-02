@@ -176,11 +176,17 @@ public class menuController implements Initializable {
 		else if("smokeshack".equals(order.get(index))){
 			cost = cost - 6.69;
 		}
-        //To fix bug where zero is negative
+        
         cost = cost + 0;
         tax = calTax(cost);
         total = cost + tax;
         
+        //To fix bug where zero is negative
+        if (cost < 0) {
+        	cost = cost * -1;
+            tax = tax*-1;
+            total = total*-1;
+        }
         orderCost.setText("Cost:	" + String.format("%.2f", cost));
         orderTax.setText("Tax:	" + String.format("%.2f", tax));
         totalOrdercost.setText("Total:	" + String.format("%.2f", total));
@@ -198,6 +204,13 @@ public class menuController implements Initializable {
 	        alert.showAndWait();
     	}
     	
+    	else if (userOrder.getItems().isEmpty()){
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+	        alert.setTitle("Error");
+	        alert.setHeaderText("This Order is Empty, please click on what you want to order");
+	        alert.showAndWait();
+    	}
+    	
     	else{
     	 //Logs files
     	 fileIO processText = new fileIO();
@@ -207,7 +220,6 @@ public class menuController implements Initializable {
 		 processText.wrTransactionData(selectedLocation.getText());
 		 //Get order
 		 processText.wrTransactionData(userOrder.getItems().toString());
-		 
 		 processText.wrTransactionData(orderCost.getText());
 		 processText.wrTransactionData(orderTax.getText());
 		 processText.wrTransactionData(totalOrdercost.getText());

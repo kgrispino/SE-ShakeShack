@@ -224,6 +224,7 @@ public class sockServer implements Runnable
 	              fileIO transLog = new fileIO();
 	              transLog.wrTransactionData(clientString);
 	              // update the status text area to show progress of program
+	              
 	              Controllers.getMainController().userLog.appendText("RECV : " + clientString + newline);
 	     	       
 	     	       // update the status text area to show progress of program
