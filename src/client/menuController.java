@@ -155,42 +155,61 @@ public class menuController implements Initializable {
     @FXML
     private void removeButtonAction( MouseEvent event) {
     	//String selectedItem = userOrder.getSelectionModel().getSelectedItem();
-        int index = userOrder.getSelectionModel().getSelectedIndex();
-        //System.out.println("Removed: " + selectedItem + index);
-        //removes cost of item from total
-        if("hamburger".equals(order.get(index))){
-			cost = cost - 4.19;
-		}
-		else if("chicken".equals(order.get(index))){
-			cost = cost - 6.19;
-		}
-		else if("fries".equals(order.get(index))){
-			cost = cost - 2.95;
-  		}
-		else if("hotdog".equals(order.get(index))){
-			cost = cost - 3.25;
-		}
-		else if("shackburger".equals(order.get(index))){
-			cost = cost - 5.19;
-  		}
-		else if("smokeshack".equals(order.get(index))){
-			cost = cost - 6.69;
-		}
-        
-        cost = cost + 0;
-        tax = calTax(cost);
-        total = cost + tax;
-        
-        //To fix bug where zero is negative
-        if (cost < 0) {
-        	cost = cost * -1;
-            tax = tax*-1;
-            total = total*-1;
-        }
-        orderCost.setText("Cost:	" + String.format("%.2f", cost));
-        orderTax.setText("Tax:	" + String.format("%.2f", tax));
-        totalOrdercost.setText("Total:	" + String.format("%.2f", total));
-        userOrder.getItems().remove(index);
+    	
+    	if (userOrder.getItems().isEmpty()){
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+	        alert.setTitle("Error");
+	        alert.setHeaderText("This Order is Empty, you can't remove anything");
+	        alert.showAndWait();
+    	}
+    	
+    	else {
+	        int index = userOrder.getSelectionModel().getSelectedIndex();
+	        //System.out.println("Removed: " + selectedItem + index);
+	        //removes cost of item from total
+	        if (index == -1 ){
+	        	Alert alert = new Alert(Alert.AlertType.ERROR);
+		        alert.setTitle("Error");
+		        alert.setHeaderText("You need to click the item above to remove it, you can't remove anything becuase you didn't select anything to remove");
+		        alert.showAndWait();
+	        }
+	        
+	        else {
+		        if("hamburger".equals(order.get(index))){
+					cost = cost - 4.19;
+				}
+				else if("chicken".equals(order.get(index))){
+					cost = cost - 6.19;
+				}
+				else if("fries".equals(order.get(index))){
+					cost = cost - 2.95;
+		  		}
+				else if("hotdog".equals(order.get(index))){
+					cost = cost - 3.25;
+				}
+				else if("shackburger".equals(order.get(index))){
+					cost = cost - 5.19;
+		  		}
+				else if("smokeshack".equals(order.get(index))){
+					cost = cost - 6.69;
+				}
+		        
+		        cost = cost + 0;
+		        tax = calTax(cost);
+		        total = cost + tax;
+		        
+		        //To fix bug where zero is negative
+		        if (cost < 0) {
+		        	cost = cost * -1;
+		            tax = tax*-1;
+		            total = total*-1;
+		        }
+		        orderCost.setText("Cost:	" + String.format("%.2f", cost));
+		        orderTax.setText("Tax:	" + String.format("%.2f", tax));
+		        totalOrdercost.setText("Total:	" + String.format("%.2f", total));
+		        userOrder.getItems().remove(index);
+	        }
+    	}
     }
     
     @FXML
