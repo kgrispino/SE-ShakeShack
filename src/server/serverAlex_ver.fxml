@@ -63,7 +63,7 @@
       </Label>
       <Button fx:id="exitButton" mnemonicParsing="false" onMouseClicked="#removeButtonAction" text="Exit" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <tooltip>
-            <Tooltip text="Click this button to EXIT the socket server application program.&quot;Click this button to EXIT the socket server application program." />
+            <Tooltip text="Click this to EXIT the socket server application program" />
          </tooltip></Button>
       <TextArea fx:id="foodLog" layoutX="214.0" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="192.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowSpan="2" />
       <TextArea fx:id="userLog" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowSpan="2" />
@@ -94,7 +94,7 @@
             <Insets />
          </GridPane.margin>
          <tooltip>
-            <Tooltip text="Click this button to EXIT the socket server application program" />
+            <Tooltip text="Click this to view store logs" />
          </tooltip>
       </Button>
       <Button fx:id="newStoreBtn" mnemonicParsing="false" onMouseClicked="#openStoreClick" text="Create new Store" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">

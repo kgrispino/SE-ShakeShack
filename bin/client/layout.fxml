@@ -72,7 +72,7 @@
                      </tooltip></Button>
                   <Button fx:id="removeButton" mnemonicParsing="false" onMouseClicked="#removeButtonAction" text="Remove item" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <tooltip>
-                        <Tooltip text="Click this to submit your order" />
+                        <Tooltip text="Select the item you would like to remove, then click this" />
                      </tooltip></Button>
                   <Button fx:id="submitButton" mnemonicParsing="false" onMouseClicked="#submitButtonAction" text="Submit order" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <tooltip>
