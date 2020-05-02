@@ -89,7 +89,7 @@
          </GridPane.margin>
       </Label>
       <Label fx:id="clock" text="Current Time" GridPane.halignment="CENTER" />
-      <Button fx:id="logBtn" mnemonicParsing="false" onMouseClicked="#logClick" text="Show logs" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <Button fx:id="logBtn" mnemonicParsing="false" onMouseClicked="#logClick" text="Show logs" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -101,5 +101,6 @@
          <tooltip>
             <Tooltip text="Click this to create a new store" />
          </tooltip></Button>
+      <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#summaryClick" text="Summary" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
    </children>
 </GridPane>

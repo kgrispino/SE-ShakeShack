@@ -93,6 +93,16 @@ public class serverController implements Initializable {
 	}
 	
 	@FXML
+	private void summaryClick(MouseEvent event) {   
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("--- Store Summary ---");
+        alert.setHeaderText("Summary");    
+        alert.setContentText(sockServer.getAllTransactions());
+        alert.getDialogPane().setPrefSize(1100, 480);   
+        alert.showAndWait();
+	}
+	
+	@FXML
 	private void openStoreClick(MouseEvent event) {   
 		int nextStoreNumber, currentSize = 0;
 		String storeString;
